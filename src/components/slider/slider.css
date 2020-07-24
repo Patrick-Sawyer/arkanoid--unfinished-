@@ -1,0 +1,11 @@
+.slider {
+    height: 50px;
+    position: absolute; 
+    bottom: 0;
+}
+
+.platform {
+    padding: 0px 25px;
+    position: relative;
+    bottom: 2px;
+}

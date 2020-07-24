@@ -1,0 +1,51 @@
+.brick {
+    height: 30px;
+    width: 70px;
+    display: inline-block;
+    box-sizing: border-box;
+    -webkit-box-shadow: inset 0px 0px 132px -84px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset 0px 0px 132px -84px rgba(0,0,0,0.75);
+    box-shadow: inset 0px 0px 132px -84px rgba(0,0,0,0.75);
+    border: 3px ridge rgba(100, 100, 100, 0.3);
+
+}
+
+.empty {
+    height: 30px;
+    width: 70px;
+    display: inline-block;
+    box-sizing: border-box;
+    border: 1px solid red;
+}
+
+.empty {
+
+}
+
+.red {
+    background: #de5516;
+}
+
+.blue {
+    background: #1d95c4;
+}
+
+.green {
+    background: #29965a;
+}
+
+.yellow {
+    background: #ebae07;
+}
+
+.purple {
+    background: #5c3e73;
+}
+
+.broken {
+    background-image: url("../../images/broken.png");
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    opacity:0.5;
+}
