@@ -38,8 +38,11 @@ class Brick extends Component {
                 this.props.updateLayout(i, "right", right);
                 this.props.updateLayout(i, "top", top);
                 this.props.updateLayout(i, "bottom", bottom);
+
+                console.log(left, right, top, bottom);
             }
         }
+
     }
 
     broken = () => {

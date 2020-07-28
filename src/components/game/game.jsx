@@ -15,14 +15,35 @@ let level1 = [
     },
     {
         row: 1,
-        cell: 1,
+        cell: 12,
         color: "purple",
+        weapon: true,
+        broken: false
+    },
+    {
+        row: 5,
+        cell: 9,
+        color: "yellow",
         weapon: true,
         broken: false
     },
     {
         row: 2,
         cell: 2,
+        color: "blue",
+        weapon: true,
+        broken: false
+    },
+    {
+        row: 4,
+        cell: 4,
+        color: "purple",
+        weapon: true,
+        broken: false
+    },
+    {
+        row: 6,
+        cell: 8,
         color: "yellow",
         weapon: true,
         broken: false
@@ -43,7 +64,7 @@ class Game extends Component {
     updateBallPosition = (axis, position) => {
 
         if(axis === "X"){
-            this.contactCheckX(position);
+            position = this.contactCheckX(position);
             if(position >= 1025){
                 position = 1025;
                 this.flipX();
@@ -56,7 +77,7 @@ class Game extends Component {
                 ballPosition: [position, this.state.ballPosition[1]]
             })
         }else if(axis === "Y"){
-            this.contactCheckY(position);
+            position = this.contactCheckY(position);
             if(position >= 754){
                 position = 754;
                 this.flipY();
@@ -73,16 +94,37 @@ class Game extends Component {
     }
 
     contactCheckX = (position) => {
+        for(let i in this.state.layout){
+            if(this.state.ballPosition[1] >= (this.state.layout[i].bottom) && this.state.ballPosition[1] <= (this.state.layout[i].top + 25)){
+                if(position >= (this.state.layout[i].left - 25) && position <= (this.state.layout[i].right)){
+                    this.flipX();
+                    if(this.state.direction[0] > 0){
+                        return (this.state.layout[i].right + 1);
+                    }else{
+                        return (this.state.layout[i].left - 26);
+                    }
+                }
+            }
+        }
+
+        return position;
     }
 
     contactCheckY = (position) => {
         for(let i in this.state.layout){
-            if(this.state.ballPosition[0] >= (this.state.layout[i].left) && this.state.ballPosition[0] <= (this.state.layout[i].right)){
-                if(this.state.direction[1] >= 0 && position >= (this.state.layout[i].bottom)){
+            if(this.state.ballPosition[0] >= (this.state.layout[i].left - 25) && this.state.ballPosition[0] <= (this.state.layout[i].right)){
+                if(position >= (this.state.layout[i].bottom) && position <= (this.state.layout[i].top + 25)){
                     this.flipY();
+                    if(this.state.direction[1] > 0){
+                        return (this.state.layout[i].top + 26);
+                    }else{
+                        return (this.state.layout[i].bottom - 1);
+                    }
                 }
             }
         }
+
+        return position;
     }
 
     ballPlatformCheck = () => {
