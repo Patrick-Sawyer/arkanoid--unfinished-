@@ -1,3 +1,12 @@
+@font-face {
+  font-family: Casanova;
+  src: url(./fonts/CasanovaScotia-Xm0K.ttf);
+}
+
+body {
+  font-family: "Casanova", "Verdana", "Arial";
+}
+
 .container {
   text-align: center;
 }

@@ -10,43 +10,31 @@ let level1 = [
         row: 0,
         cell: 0,
         color: "blue",
-        weapon: true,
-        broken: false
     },
     {
         row: 1,
         cell: 12,
         color: "purple",
-        weapon: true,
-        broken: false
     },
     {
         row: 5,
         cell: 9,
         color: "yellow",
-        weapon: true,
-        broken: false
     },
     {
         row: 2,
         cell: 2,
         color: "blue",
-        weapon: true,
-        broken: false
     },
     {
         row: 4,
         cell: 4,
         color: "purple",
-        weapon: true,
-        broken: false
     },
     {
         row: 6,
         cell: 8,
         color: "yellow",
-        weapon: true,
-        broken: false
     },
 ];
 
@@ -93,11 +81,20 @@ class Game extends Component {
 
     }
 
+    breakBrick = (index) => {
+        if(this.state.layout[index].broken === false){
+            this.updateLayout(index, "broken", true);
+        }else{
+            this.updateLayout(index, "exists", false);
+        }
+    }
+
     contactCheckX = (position) => {
         for(let i in this.state.layout){
-            if(this.state.ballPosition[1] >= (this.state.layout[i].bottom) && this.state.ballPosition[1] <= (this.state.layout[i].top + 25)){
+            if(this.state.layout[i].exists === true && this.state.ballPosition[1] >= (this.state.layout[i].bottom) && this.state.ballPosition[1] <= (this.state.layout[i].top + 25)){
                 if(position >= (this.state.layout[i].left - 25) && position <= (this.state.layout[i].right)){
                     this.flipX();
+                    this.breakBrick(i);
                     if(this.state.direction[0] > 0){
                         return (this.state.layout[i].right + 1);
                     }else{
@@ -112,9 +109,10 @@ class Game extends Component {
 
     contactCheckY = (position) => {
         for(let i in this.state.layout){
-            if(this.state.ballPosition[0] >= (this.state.layout[i].left - 25) && this.state.ballPosition[0] <= (this.state.layout[i].right)){
+            if(this.state.layout[i].exists === true && this.state.ballPosition[0] >= (this.state.layout[i].left - 25) && this.state.ballPosition[0] <= (this.state.layout[i].right)){
                 if(position >= (this.state.layout[i].bottom) && position <= (this.state.layout[i].top + 25)){
                     this.flipY();
+                    this.breakBrick(i);
                     if(this.state.direction[1] > 0){
                         return (this.state.layout[i].top + 26);
                     }else{
@@ -184,7 +182,6 @@ class Game extends Component {
         this.setState({
             layout: layoutCopy
         })
-        console.log(this.state.layout);
     }
 
     render() { 

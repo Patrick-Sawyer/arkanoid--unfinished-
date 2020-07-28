@@ -6,6 +6,14 @@ class Grid extends Component {
 
     state = { layout: this.props.layout }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.layout !== this.props.layout) {
+            this.setState({
+                layout: nextProps.layout
+            });
+        }
+    }
+
     render() { 
 
         let rows = [];
